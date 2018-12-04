@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
+@Disabled
 @Autonomous(name = "Crater")
 public class Crater extends LinearOpMode {
+
     Robot robot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.hardware(hardwareMap);
+        robot.hardware(hardwareMap, telemetry);
 
         waitForStart();
 

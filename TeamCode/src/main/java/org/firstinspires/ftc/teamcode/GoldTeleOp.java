@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 @TeleOp(name = "bot")
 
 public class GoldTeleOp extends OpMode {
@@ -16,41 +18,55 @@ public class GoldTeleOp extends OpMode {
 
     @Override
     public void init(){
-        robot.hardware(hardwareMap);
+        robot.hardware(hardwareMap, telemetry);
         gamepad1.setJoystickDeadzone(0.1f);
         gamepad2.setJoystickDeadzone(0.1f);
-
-
     }
 
     @Override
     public void loop(){
+
+        //Gamepad 1-driver
         double leftsticky = -(gamepad1.left_stick_y);
         double rightsticky = -(gamepad1.right_stick_y);
-        boolean buttonA = gamepad1.a;
-        boolean buttonB = gamepad1.b;
+        boolean intake = gamepad1.left_bumper;
+        boolean outake = gamepad1.right_bumper;
+        //gamepad 2-manipultor
+        double flipper = -(gamepad2.left_stick_y);
+        boolean buttonA = gamepad2.a;
+        boolean buttonB = gamepad2.b;
 
 
         robot.topLeft.setPower(leftsticky);
         robot.bottomLeft.setPower(leftsticky);
         robot.topRight.setPower(rightsticky);
         robot.bottomRight.setPower(rightsticky);
+        
+        robot.flipper.setPower(flipper);
 
-        /*if (buttonA) {
-            rightIntake.setPower(0.75);
-            leftIntake.setPower(0.75);
+        if (buttonA) {
+            robot.latch.setPower(1.00);
         }else {
-            rightIntake.setPower(0.0);
-            leftIntake.setPower(0.0);
+            robot.latch.setPower(0.0);
         }
         if (buttonB) {
-            rightIntake.setPower(-0.75);
-            leftIntake.setPower(-0.75);
+            robot.latch.setPower(-1.00);
+
         }else {
-            rightIntake.setPower(0.0);
-            leftIntake.setPower(0.0);
+            robot.latch.setPower(0.0);
+        }
+        if (intake) {
+            robot.Intake.setPower(1.00);
+        }else {
+            robot.Intake.setPower(0.0);
+        }
+        if (outake) {
+            robot.Intake.setPower(-1.00);
+
+        }else {
+            robot.Intake.setPower(0.0);
         }
 
-    */
+
     }
 }
