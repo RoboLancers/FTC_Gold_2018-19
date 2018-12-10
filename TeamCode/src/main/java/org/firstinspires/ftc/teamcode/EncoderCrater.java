@@ -25,12 +25,9 @@ public class EncoderCrater extends LinearOpMode {
 
         waitForStart();
 
-        robot.latchOpen(1.0);
-        sleep(2000);
+        robot.latch(1.0,5);
         robot.rotateRobotLeft(-30);
-        robot.latchClose(1.0);
-        sleep(1600);
-
+        robot.latch(1.0,-5);
         robot.rotateRobotRight(-30);
         robot.driveDistance(1.0, 11);
 

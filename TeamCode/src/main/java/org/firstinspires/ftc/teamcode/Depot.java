@@ -33,7 +33,7 @@ public class Depot extends LinearOpMode {
         sleep(2750);
         robot.driveBackward(0.5);
         sleep(1000);
-        robot.turnRight(0.75);
+        robot.rotateRobotRight(30);
         sleep (1650);
         robot.driveForward(0.99);
         sleep (5500);
