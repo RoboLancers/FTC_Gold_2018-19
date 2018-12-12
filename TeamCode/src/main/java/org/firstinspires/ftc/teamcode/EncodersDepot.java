@@ -50,20 +50,20 @@ public class EncodersDepot extends LinearOpMode {
 
         if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.LEFT) {
             robot.rotateRobotLeft(15);
-            robot.driveDistance(1, 17);
+            robot.driveDistance(1, 11);
             robot.rotateRobotRight(30);
             robot.driveDistance(1, 15);
             robot.rotateRobotRight(90);
             robot.driveDistance(1,96);
         } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.RIGHT) {
             robot.rotateRobotRight(15);
-            robot.driveDistance(1, 17);
+            robot.driveDistance(1, 11);
             robot.rotateRobotLeft(30);
             robot.driveDistance(1, 15);
             robot.rotateRobotRight(180);
             robot.driveDistance(1,96);
         } else {
-            robot.driveDistance(1, 17);
+            robot.driveDistance(1, 11);
             robot.rotateRobotRight(90);
             robot.driveDistance(1,96);
 
