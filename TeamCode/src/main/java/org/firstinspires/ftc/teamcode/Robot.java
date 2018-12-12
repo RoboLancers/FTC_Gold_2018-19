@@ -20,7 +20,6 @@ public class Robot {
 
     BNO055IMU imu;
     Telemetry telemetry;
-
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
         topRight = hardwareMap.dcMotor.get("Top Right");
@@ -43,11 +42,9 @@ public class Robot {
 
         this.telemetry = telemetry;
     }
-
-    public void outake(double power) {
+    public void outake(double power){
         Intake.setPower(power);
     }
-
     public void driveForward(double power) {
         topLeft.setPower(power);
         bottomLeft.setPower(power);
@@ -62,6 +59,28 @@ public class Robot {
         bottomRight.setPower(-power);
     }
 
+    public void turnRight(double power) {
+        topRight.setPower(power);
+        bottomRight.setPower(power);
+        bottomLeft.setPower(-power);
+        topLeft.setPower(-power);
+    }
+
+    public void turnLeft(double power) {
+        topRight.setPower(-power);
+        bottomRight.setPower(-power);
+        bottomLeft.setPower(power);
+        topLeft.setPower(power);
+
+    }
+
+    public void latchOpen(double power) {
+        latch.setPower(power);
+    }
+
+    public void latchClose(double power) {
+        latch.setPower(-power);
+    }
 
     public void StopDriving() {
         topRight.setPower(0);
@@ -95,20 +114,6 @@ public class Robot {
         StopDriving();
     }
 
-   public void latch(double power, double inches) {
-        latch.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-        latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        latch.setTargetPosition((int) ((inchesToTick(inches))));
-        latch.setPower(power);
-        while (latch.isBusy()) {
-
-        }
-        latch.setPower(0);
-    }
-
-
-
-
     public double inchesToTick(double inches) {
         //converts the amount of inches into ticks
         double circumference = Math.PI * 4;
@@ -120,8 +125,32 @@ public class Robot {
     1 in = 114 ticks
      */
 
+    public void latchEncoder(double power, double inches) {
+        latch.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        latch.setTargetPosition((int) ((inchesToTick(inches))));
 
-    public double getAngle() {
+        while(latch.isBusy()){
+
+        }
+        latch.setPower(power);
+    }
+
+
+    public void turnRightEncoder(double power, double inches) {
+        topRight.setPower(power);
+        bottomRight.setPower(power);
+        bottomLeft.setPower(-power);
+        topLeft.setPower(-power);
+    }
+
+    public void turnLeftEncoder(double power, double inches) {
+        topRight.setPower(-power);
+        bottomRight.setPower(-power);
+        bottomLeft.setPower(power);
+        topLeft.setPower(power);
+    }
+    public double getAngle(){
         return AngleUnit.DEGREES.normalize(imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
     }
 
@@ -145,7 +174,6 @@ public class Robot {
         }
 
     }
-
     public void rotateRobotRight(double Degrees) {
         double currentAngle = getAngle();
         double error = Degrees - getAngle();
