@@ -14,25 +14,23 @@ public class EncodersDepot extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.hardware(hardwareMap, telemetry);
-        tensorflowWrapper = new TensorflowWrapper(hardwareMap);
-        tensorflowWrapper.activateTfod();
+        robot.hardware2(hardwareMap);
+    //    tensorflowWrapper = new TensorflowWrapper(hardwareMap);
+    //    tensorflowWrapper.activateTfod();
 
         waitForStart();
 
 
-        robot.latchOpen(1.0);
-        sleep(1600);
-        robot.rotateRobotLeft(-30);
-        robot.latchClose(1.0);
-        sleep(1600);
-        robot.rotateRobotRight(-30);
+        robot.latch(1.0, 5);
+        robot.rotateRobotRight(15);
+        robot.latch(1.0, -5);
+        robot.rotateRobotRight(-15);
 
         robot.driveDistance(1.0,53);
         robot.driveDistance(1.0, -5);
         robot.driveDistance(1.0, 5);
 
-        robot.rotateRobotLeft(-140);
+        robot.rotateRobotRight(140);
         robot.driveDistance(1.0, 105);
         //robot.driveDistance(1,86);
 

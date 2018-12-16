@@ -15,32 +15,23 @@ public class EncoderCrater extends LinearOpMode {
 
     Robot robot = new Robot();
     // TensorflowWrapper tensorflowWrapper;
-
-
+    //
+    //
     @Override
     public void runOpMode() throws InterruptedException {
       //  tensorflowWrapper = new TensorflowWrapper(hardwareMap);
       //  tensorflowWrapper.activateTfod();
-        robot.hardware(hardwareMap, telemetry);
+        robot.hardware2(hardwareMap);
 
         waitForStart();
 
-        robot.latchOpen(1.0);
-        sleep(2000);
-        robot.rotateRobotLeft(-30);
-        robot.latchClose(1.0);
-        sleep(1600);
+        robot.latch(1.0, 5);
 
         robot.rotateRobotRight(-30);
-        robot.driveDistance(1.0, 11);
+        robot.latch(1.0, -5);
+        robot.rotateRobotRight(30);
+                                               robot.driveDistance(1.0,41);
 
-        robot.rotateRobotLeft(-90);
-        robot.driveDistance(1.0, 40);
-        robot.rotateRobotLeft(-50);
-
-        robot.driveDistance(1.0,40);
-
-        robot.driveDistance(1.0, -105);
 
 
         /*

@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-@Autonomous(name = "Crater")
-public class Crater extends LinearOpMode {
+
+@Disabled
+
+@Autonomous(name = "Crater2")
+public class Crater2 extends LinearOpMode {
 
     Robot robot = new Robot();
     @Override
@@ -22,7 +26,18 @@ public class Crater extends LinearOpMode {
         robot.turnRight(-1.0);
         sleep(500);
 
-        robot.driveDistance(1,41);
+        robot.driveDistance(1, 11);
+        robot.turnRight(-1.0);
+        sleep(1000);
+        robot.driveDistance(1,40);
+        robot.turnRight(-1.0);
+        sleep(1000);
+        robot.driveDistance(1,40);
+
+        //robot.driveDistance(1,-5);
+        //robot.driveDistance(1,5);
+        //robot.driveDistance(1,-105);
+
     }
 
 

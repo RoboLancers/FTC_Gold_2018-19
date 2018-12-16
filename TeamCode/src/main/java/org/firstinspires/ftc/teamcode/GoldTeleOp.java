@@ -18,7 +18,7 @@ public class GoldTeleOp extends OpMode {
 
     @Override
     public void init(){
-        robot.hardware(hardwareMap, telemetry);
+        robot.hardware2(hardwareMap);
         gamepad1.setJoystickDeadzone(0.1f);
         gamepad2.setJoystickDeadzone(0.1f);
     }
@@ -26,7 +26,7 @@ public class GoldTeleOp extends OpMode {
     @Override
     public void loop(){
 
-        //Gamepad 1-driver
+        //gamepad 1-driver
         double leftsticky = -(gamepad1.left_stick_y);
         double rightsticky = -(gamepad1.right_stick_y);
         boolean intake = gamepad1.left_bumper;
@@ -42,14 +42,14 @@ public class GoldTeleOp extends OpMode {
         robot.topRight.setPower(rightsticky);
         robot.bottomRight.setPower(rightsticky);
         
-        robot.flipper.setPower(flipper);
+        robot.flipper.setPower(flipper * 0.5);
 
-        if (buttonA) {
+        if (buttonA) /* button 4 or y */{
             robot.latch.setPower(1.00);
         }else {
             robot.latch.setPower(0.0);
         }
-        if (buttonB) {
+        if (buttonB)  /* button 1 or x*/ {
             robot.latch.setPower(-1.00);
 
         }else {
