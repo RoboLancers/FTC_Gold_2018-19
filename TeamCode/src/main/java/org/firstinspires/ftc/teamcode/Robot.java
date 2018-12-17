@@ -21,6 +21,20 @@ public class Robot {
     BNO055IMU imu;
     Telemetry telemetry;
 
+    public void hardware2(HardwareMap hardwareMap){
+        topLeft = hardwareMap.dcMotor.get("Top Left");
+        topRight = hardwareMap.dcMotor.get("Top Right");
+        bottomLeft = hardwareMap.dcMotor.get("Bottom Left");
+        bottomRight = hardwareMap.dcMotor.get("Bottom Right");
+        latch = hardwareMap.dcMotor.get("Latch");
+
+        Intake = hardwareMap.dcMotor.get("Intake");
+        flipper = hardwareMap.dcMotor.get("Flipper");
+
+        topLeft.setDirection(DcMotor.Direction.REVERSE);
+        bottomLeft.setDirection(DcMotor.Direction.REVERSE);
+    }
+
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
         topRight = hardwareMap.dcMotor.get("Top Right");
@@ -62,13 +76,33 @@ public class Robot {
         bottomRight.setPower(-power);
     }
 
+    public void turnLeft(double power) {
+        topLeft.setPower(-power);
+        bottomLeft.setPower(-power);
+        topRight.setPower(power);
+        bottomRight.setPower(power);
+    }
+
+    public void turnRight(double power) {
+        topLeft.setPower(power);
+        bottomLeft.setPower(power);
+        topRight.setPower(-power);
+        bottomRight.setPower(-power);
+    }
 
     public void StopDriving() {
         topRight.setPower(0);
         bottomRight.setPower(0);
         bottomLeft.setPower(0);
         topLeft.setPower(0);
+        latch.setPower(0);
     }
+
+
+    public void latchNotEncoder(double power) {
+        latch.setPower(power);
+    }
+
 
     public void driveDistance(double power, double inches) {
 
@@ -98,12 +132,10 @@ public class Robot {
    public void latch(double power, double inches) {
         latch.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
         latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        latch.setTargetPosition((int) ((inchesToTick(inches))));
+        latch.setTargetPosition((int) (inchesToTick(inches)));
         latch.setPower(power);
-        while (latch.isBusy()) {
 
-        }
-        latch.setPower(0);
+        StopDriving();
     }
 
 
