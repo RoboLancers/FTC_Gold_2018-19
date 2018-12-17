@@ -129,7 +129,7 @@ public class Robot {
         StopDriving();
     }
 
-    public void latch(double power, double inches) {
+   public void latch(double power, double inches) {
         latch.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
         latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         latch.setTargetPosition((int) (inchesToTick(inches)));
@@ -137,6 +137,9 @@ public class Robot {
 
         StopDriving();
     }
+
+
+
 
     public double inchesToTick(double inches) {
         //converts the amount of inches into ticks

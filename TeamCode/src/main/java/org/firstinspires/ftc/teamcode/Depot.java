@@ -18,11 +18,11 @@ public class Depot extends LinearOpMode {
         sleep(3000);
         robot.turnRight(1.0);
         sleep(500);
+      
         robot.latchNotEncoder(-0.5);
         sleep(2500);
         robot.turnRight(-1.0);
         sleep(500);
-
 
         robot.driveDistance(1,53);
         robot.driveDistance(1,-10);
@@ -33,8 +33,7 @@ public class Depot extends LinearOpMode {
         robot.StopDriving();
         sleep(500);
         robot.driveDistance(1,105);
-
-*/
+        */
 
 
 
