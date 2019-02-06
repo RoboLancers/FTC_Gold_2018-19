@@ -105,19 +105,19 @@ public class Robot {
     public void driveDistance(double power, double inches) {
 
         topLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         topRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         topLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-       // bottomLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bottomLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         topRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-       // bottomRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bottomRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         topLeft.setTargetPosition((int) ((inchesToTick(inches))));
-       // bottomLeft.setTargetPosition((int) ((inchesToTick(inches))));
+        bottomLeft.setTargetPosition((int) ((inchesToTick(inches))));
         topRight.setTargetPosition((int) ((inchesToTick(inches))));
-        //bottomRight.setTargetPosition((int) (inchesToTick(inches)));
+        bottomRight.setTargetPosition((int) (inchesToTick(inches)));
 
         driveForward(power);
 

@@ -16,13 +16,13 @@ public class Crater extends LinearOpMode {
      // default is left for rotating
      // default is backwards for driving w/ encoders
 
-       /* robot.latchNotEncoder(1);
+        robot.latchNotEncoder(1);
         sleep(2000);
         robot.rotateRobot(-50);
         robot.latchNotEncoder(-1);
         sleep(1800);
-        robot.rotateRobot(15);
-        */
+        robot.rotateRobot(10);
+
 
         robot.driveDistance(1,-30);
 

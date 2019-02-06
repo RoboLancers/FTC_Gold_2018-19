@@ -18,13 +18,9 @@ public class CraterToDepot extends LinearOpMode {
         robot.latchNotEncoder(1);
         sleep(2000);
         robot.rotateRobot(-50);
-        //robot.turnRight(1);
-        //sleep(1000);
         robot.latchNotEncoder(-1);
         sleep(2500);
-        robot.turnRight(-1);
-        sleep(1600);
-
+        robot.rotateRobot(10);
 
         robot.driveDistance(1, -37);
         robot.rotateRobot(90);
