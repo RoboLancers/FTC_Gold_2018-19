@@ -20,6 +20,21 @@ public class Robot {
 
     BNO055IMU imu;
     Telemetry telemetry;
+
+    public void hardware2(HardwareMap hardwareMap){
+        topLeft = hardwareMap.dcMotor.get("Top Left");
+        topRight = hardwareMap.dcMotor.get("Top Right");
+        bottomLeft = hardwareMap.dcMotor.get("Bottom Left");
+        bottomRight = hardwareMap.dcMotor.get("Bottom Right");
+        latch = hardwareMap.dcMotor.get("Latch");
+
+        Intake = hardwareMap.dcMotor.get("Intake");
+        flipper = hardwareMap.dcMotor.get("Flipper");
+
+        topLeft.setDirection(DcMotor.Direction.REVERSE);
+        bottomLeft.setDirection(DcMotor.Direction.REVERSE);
+    }
+
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
         topRight = hardwareMap.dcMotor.get("Top Right");
@@ -42,9 +57,11 @@ public class Robot {
 
         this.telemetry = telemetry;
     }
-    public void outake(double power){
+
+    public void outake(double power) {
         Intake.setPower(power);
     }
+
     public void driveForward(double power) {
         topLeft.setPower(power);
         bottomLeft.setPower(power);
@@ -59,27 +76,18 @@ public class Robot {
         bottomRight.setPower(-power);
     }
 
-    public void turnRight(double power) {
+    public void turnLeft(double power) {
+        topLeft.setPower(-power);
+        bottomLeft.setPower(-power);
         topRight.setPower(power);
         bottomRight.setPower(power);
-        bottomLeft.setPower(-power);
-        topLeft.setPower(-power);
     }
 
-    public void turnLeft(double power) {
+    public void turnRight(double power) {
+        topLeft.setPower(power);
+        bottomLeft.setPower(power);
         topRight.setPower(-power);
         bottomRight.setPower(-power);
-        bottomLeft.setPower(power);
-        topLeft.setPower(power);
-
-    }
-
-    public void latchOpen(double power) {
-        latch.setPower(power);
-    }
-
-    public void latchClose(double power) {
-        latch.setPower(-power);
     }
 
     public void StopDriving() {
@@ -87,7 +95,14 @@ public class Robot {
         bottomRight.setPower(0);
         bottomLeft.setPower(0);
         topLeft.setPower(0);
+        latch.setPower(0);
     }
+
+
+    public void latchNotEncoder(double power) {
+        latch.setPower(power);
+    }
+
 
     public void driveDistance(double power, double inches) {
 
@@ -114,6 +129,18 @@ public class Robot {
         StopDriving();
     }
 
+   public void latch(double power, double inches) {
+        latch.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+        latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        latch.setTargetPosition((int) (inchesToTick(inches)));
+        latch.setPower(power);
+
+        StopDriving();
+    }
+
+
+
+
     public double inchesToTick(double inches) {
         //converts the amount of inches into ticks
         double circumference = Math.PI * 4;
@@ -125,32 +152,8 @@ public class Robot {
     1 in = 114 ticks
      */
 
-    public void latchEncoder(double power, double inches) {
-        latch.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        latch.setTargetPosition((int) ((inchesToTick(inches))));
 
-        while(latch.isBusy()){
-
-        }
-        latch.setPower(power);
-    }
-
-
-    public void turnRightEncoder(double power, double inches) {
-        topRight.setPower(power);
-        bottomRight.setPower(power);
-        bottomLeft.setPower(-power);
-        topLeft.setPower(-power);
-    }
-
-    public void turnLeftEncoder(double power, double inches) {
-        topRight.setPower(-power);
-        bottomRight.setPower(-power);
-        bottomLeft.setPower(power);
-        topLeft.setPower(power);
-    }
-    public double getAngle(){
+    public double getAngle() {
         return AngleUnit.DEGREES.normalize(imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
     }
 
@@ -174,6 +177,7 @@ public class Robot {
         }
 
     }
+
     public void rotateRobotRight(double Degrees) {
         double currentAngle = getAngle();
         double error = Degrees - getAngle();
