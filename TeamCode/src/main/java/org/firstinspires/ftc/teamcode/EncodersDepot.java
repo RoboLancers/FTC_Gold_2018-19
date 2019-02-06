@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.vision.MineralPosition;
-import org.firstinspires.ftc.teamcode.vision.TensorflowWrapper;
+import org.firstinspires.ftc.teamcode.utility.vision.TensorflowWrapper;
 
+@Disabled
 @Autonomous (name = "EncoderDepot")
 
 public class EncodersDepot extends LinearOpMode {
@@ -25,9 +26,9 @@ public class EncodersDepot extends LinearOpMode {
 
         robot.latch(1.0, 5);
 
-        robot.rotateRobotRight(15);
+        robot.rotateRobot(15);
         robot.latch(1.0, -5);
-        robot.rotateRobotRight(-15);
+        robot.rotateRobot(-15);
 
 
         tensorflowWrapper.activateTfod();
@@ -36,7 +37,7 @@ public class EncodersDepot extends LinearOpMode {
         robot.driveDistance(1.0, -5);
         robot.driveDistance(1.0, 5);
 
-        robot.rotateRobotRight(140);
+        robot.rotateRobot(140);
         robot.driveDistance(1.0, 105);
         //robot.driveDistance(1,86);
 

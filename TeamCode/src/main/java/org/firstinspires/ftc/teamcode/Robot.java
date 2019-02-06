@@ -34,7 +34,6 @@ public class Robot {
         topLeft.setDirection(DcMotor.Direction.REVERSE);
         bottomLeft.setDirection(DcMotor.Direction.REVERSE);
     }
-
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
         topRight = hardwareMap.dcMotor.get("Top Right");
@@ -90,7 +89,7 @@ public class Robot {
         bottomRight.setPower(-power);
     }
 
-    public void StopDriving() {
+    public void stopDriving() {
         topRight.setPower(0);
         bottomRight.setPower(0);
         bottomLeft.setPower(0);
@@ -103,46 +102,46 @@ public class Robot {
         latch.setPower(power);
     }
 
-
     public void driveDistance(double power, double inches) {
 
         topLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         topRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         topLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bottomLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       // bottomLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         topRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bottomRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       // bottomRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         topLeft.setTargetPosition((int) ((inchesToTick(inches))));
-        bottomLeft.setTargetPosition((int) ((inchesToTick(inches))));
+       // bottomLeft.setTargetPosition((int) ((inchesToTick(inches))));
         topRight.setTargetPosition((int) ((inchesToTick(inches))));
-        bottomRight.setTargetPosition((int) (inchesToTick(inches)));
+        //bottomRight.setTargetPosition((int) (inchesToTick(inches)));
 
         driveForward(power);
 
-        while (topLeft.isBusy() && bottomLeft.isBusy() && topRight.isBusy() && bottomRight.isBusy()) {
-        }
+       // while (topLeft.isBusy() /*&& bottomLeft.isBusy() && topRight.isBusy() && bottomRight.isBusy()*/) {
 
-        StopDriving();
-    }
+  //  }
+
+    stopDriving();
+}
 
    public void latch(double power, double inches) {
-        latch.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+        latch.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         latch.setTargetPosition((int) (inchesToTick(inches)));
         latch.setPower(power);
 
-        StopDriving();
+        while(latch.isBusy()){
+       }
+
+        stopDriving();
     }
 
-
-
-
     public double inchesToTick(double inches) {
-        //converts the amount of inches into ticks
+        //converts the amount of inches i3nto ticks
         double circumference = Math.PI * 4;
         double fullRotation = 1440;
         return (inches / (circumference)) * fullRotation;
@@ -157,28 +156,8 @@ public class Robot {
         return AngleUnit.DEGREES.normalize(imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
     }
 
-    public void rotateRobotLeft(double Degrees) {
-        double currentAngle = getAngle();
-        double error = Degrees - getAngle();
 
-        while (Math.abs(error) > 5) {
-
-            error = Degrees - getAngle();
-            double output = error * 0.01;
-
-            topRight.setPower(output);
-            bottomRight.setPower(output);
-            bottomLeft.setPower(-output);
-            topLeft.setPower(-output);
-
-            telemetry.addData("angle is ", getAngle());
-            telemetry.update();
-
-        }
-
-    }
-
-    public void rotateRobotRight(double Degrees) {
+    public void rotateRobot(double Degrees) {
         double currentAngle = getAngle();
         double error = Degrees - getAngle();
 
@@ -195,7 +174,9 @@ public class Robot {
             telemetry.addData("angle is ", getAngle());
             telemetry.update();
 
-        }
 
+        }
+        stopDriving();
     }
+
 }

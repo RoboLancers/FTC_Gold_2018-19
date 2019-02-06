@@ -27,8 +27,8 @@ public class GoldTeleOp extends OpMode {
     public void loop(){
 
         //gamepad 1-driver
-        double leftsticky = -(gamepad1.left_stick_y);
-        double rightsticky = -(gamepad1.right_stick_y);
+        double leftsticky = (gamepad1.left_stick_y);
+        double rightsticky = (gamepad1.right_stick_y);
         boolean intake = gamepad1.left_bumper;
         boolean outake = gamepad1.right_bumper;
         //gamepad 2-manipultor

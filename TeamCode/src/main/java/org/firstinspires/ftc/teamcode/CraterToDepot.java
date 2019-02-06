@@ -5,39 +5,59 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
-@Autonomous(name = "Crater2")
-public class Crater2 extends LinearOpMode {
+@Autonomous(name = "CraterToDepot")
+public class CraterToDepot extends LinearOpMode {
 
     Robot robot = new Robot();
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.hardware2(hardwareMap);
+        robot.hardware(hardwareMap, telemetry);
 
         waitForStart();
 
-        robot.latchNotEncoder(0.5);
-        sleep(3000);
-        robot.turnRight(1.0);
-        sleep(500);
-        robot.latchNotEncoder(-0.5);
+        robot.latchNotEncoder(1);
+        sleep(2000);
+        robot.rotateRobot(-50);
+        //robot.turnRight(1);
+        //sleep(1000);
+        robot.latchNotEncoder(-1);
         sleep(2500);
-        robot.turnRight(-1.0);
-        sleep(500);
+        robot.turnRight(-1);
+        sleep(1600);
 
-        robot.driveDistance(1, 11);
-        robot.latch(1,5);
-        /*robot.turnRight(-1.0);
-        sleep(1000);
-        robot.driveDistance(1,40);
-        robot.turnRight(-1.0);
-        sleep(1000);
-        robot.driveDistance(1,40);
-*/
-        //robot.driveDistance(1,-5);
-        //robot.driveDistance(1,5);
-        //robot.driveDistance(1,-105);
+
+        robot.driveDistance(1, -37);
+        robot.rotateRobot(90);
+        robot.driveDistance(1,-37);
+        robot.rotateRobot(50);
+        robot.driveDistance(1, -65);
+        robot.outake(-1);
+        sleep(2000);
+        robot.driveDistance(1, 105);
+
+
+        /*robot.driveDistance(1, -11);
+        robot.turnRight(1);
+        sleep(2000);
+        robot.driveDistance(1, -40);
+        robot.turnRight(1);
+        sleep(2000);
+        robot.driveDistance(1,-40);
+
+        robot.driveDistance(1,10);
+        robot.driveDistance(1,-10);
+
+        robot.driveDistance(1,105);
+        */
 
     }
-
+ /*        lander to depot =  53 inches
+           depot to crater = 105 inches
+           lander to crater = 41 inches
+           lander to minerals = 11 inches
+           minerals to side wall = 40 inches
+           side wall to depot = 40 inches
+           hook to ground =
+         */
 
 }
