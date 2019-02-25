@@ -17,7 +17,7 @@ public class EncodersDepot extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         robot.hardware2(hardwareMap);
-    //    tensorflowWrapper = new TensorflowWrapper(hardwareMap);
+        tensorflowWrapper = new TensorflowWrapper(hardwareMap);
     //    tensorflowWrapper.activateTfod();
 
 

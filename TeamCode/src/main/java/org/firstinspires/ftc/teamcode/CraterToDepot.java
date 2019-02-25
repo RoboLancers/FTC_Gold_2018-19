@@ -15,45 +15,31 @@ public class CraterToDepot extends LinearOpMode {
 
         waitForStart();
 
-        robot.latchNotEncoder(1);
+        robot.latchNotEncoder(-.99);
         sleep(2000);
-        robot.rotateRobot(-50);
-        robot.latchNotEncoder(-1);
-        sleep(2500);
-        robot.rotateRobot(10);
-
-        robot.driveDistance(1, -37);
-        robot.rotateRobot(90);
-        robot.driveDistance(1,-37);
         robot.rotateRobot(50);
-        robot.driveDistance(1, -65);
-        robot.outake(-1);
-        sleep(2000);
-        robot.driveDistance(1, 105);
+        robot.latchNotEncoder(.99);
+        sleep(1800);
+        robot.rotateRobot(-10);
 
+        robot.driveDistance(.99, 20);
 
-        /*robot.driveDistance(1, -11);
-        robot.turnRight(1);
-        sleep(2000);
-        robot.driveDistance(1, -40);
-        robot.turnRight(1);
-        sleep(2000);
-        robot.driveDistance(1,-40);
+        robot.rotateRobot(-90);
+        robot.driveDistance(.99,40);
+        robot.rotateRobot(50);
+        robot.driveDistance(.99,40);
+        //robot.outake(.99);
+        //sleep(2000);
+        robot.driveDistance(.99,-100);
 
-        robot.driveDistance(1,10);
-        robot.driveDistance(1,-10);
-
-        robot.driveDistance(1,105);
-        */
 
     }
- /*        lander to depot =  53 inches
-           depot to crater = 105 inches
-           lander to crater = 41 inches
+        /* lander to 'depot =  49 inches
+           depot to crater = 85 inches
+           lander to crater = 38 inches
            lander to minerals = 11 inches
            minerals to side wall = 40 inches
            side wall to depot = 40 inches
-           hook to ground =
          */
 
 }

@@ -11,6 +11,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 
+
+
 public class Robot {
 
     DcMotor topLeft, topRight, bottomLeft, bottomRight;
@@ -19,6 +21,7 @@ public class Robot {
     DcMotor flipper;
 
     BNO055IMU imu;
+
     Telemetry telemetry;
 
     public void hardware2(HardwareMap hardwareMap){
@@ -51,7 +54,8 @@ public class Robot {
 
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
 
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu = hardwareMap.get(BNO055IMU.class,"imu");
+
         imu.initialize(parameters);
 
         this.telemetry = telemetry;
@@ -121,9 +125,13 @@ public class Robot {
 
         driveForward(power);
 
-       // while (topLeft.isBusy() /*&& bottomLeft.isBusy() && topRight.isBusy() && bottomRight.isBusy()*/) {
-
-  //  }
+        while (topLeft.isBusy() && bottomLeft.isBusy() && topRight.isBusy() && bottomRight.isBusy()) {
+            telemetry.addData("top left encoders are at",topLeft.getCurrentPosition());
+            telemetry.addData("top right encoders are at",topRight.getCurrentPosition());
+            telemetry.addData("bottom left encoders are at",bottomLeft.getCurrentPosition());
+            telemetry.addData("bottom right encoders are at",bottomRight.getCurrentPosition());
+            telemetry.update();
+         }
 
     stopDriving();
 }
@@ -135,6 +143,7 @@ public class Robot {
         latch.setPower(power);
 
         while(latch.isBusy()){
+            telemetry.addData("latch encoders are at",latch.getCurrentPosition());
        }
 
         stopDriving();
@@ -158,7 +167,6 @@ public class Robot {
 
 
     public void rotateRobot(double Degrees) {
-        double currentAngle = getAngle();
         double error = Degrees - getAngle();
 
         while (Math.abs(error) > 5) {
@@ -173,7 +181,6 @@ public class Robot {
 
             telemetry.addData("angle is ", getAngle());
             telemetry.update();
-
 
         }
         stopDriving();
