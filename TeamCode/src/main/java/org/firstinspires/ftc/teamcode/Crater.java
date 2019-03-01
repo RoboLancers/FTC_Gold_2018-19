@@ -10,29 +10,23 @@ import org.firstinspires.ftc.teamcode.utility.vision.TensorflowWrapper;
 public class Crater extends LinearOpMode {
 
     Robot robot = new Robot();
-    TensorflowWrapper tensorflowWrapper;
+    //TensorflowWrapper tensorflowWrapper;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        tensorflowWrapper = new TensorflowWrapper(hardwareMap);
-        tensorflowWrapper.activateTfod();
+       // tensorflowWrapper = new TensorflowWrapper(hardwareMap);
+       // tensorflowWrapper.activateTfod();
         robot.hardware(hardwareMap, telemetry);
 
         waitForStart();
 
-        //default for rotating is right
+        robot.latch(1,-70);
+        robot.rotateRobot(-50);
+        robot.latch(1,60);
+        robot.rotateRobot(5);
 
-        //robot.latch(1,5);
-        robot.latchNotEncoder(-.99);
-        sleep(2000);
-        robot.rotateRobot(50);
-        //robot.latch(1,-5);
-        robot.latchNotEncoder(.99);
-        sleep(1800);
-        robot.rotateRobot(-10);
-
-        robot.driveDistance(.99,38);
+        robot.driveDistance(.99,-28);
 
 
         //sampling

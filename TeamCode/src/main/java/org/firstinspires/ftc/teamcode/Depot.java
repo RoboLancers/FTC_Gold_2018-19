@@ -13,26 +13,34 @@ public class Depot extends LinearOpMode {
 
         waitForStart();
 
-        robot.latchNotEncoder(-.99);
-        sleep(2000);
-        robot.rotateRobot(50);
-        robot.latchNotEncoder(.99);
-        sleep(1800);
-        robot.rotateRobot(-10);
+        //for rotating
+        //negative=right
+        //positive=left
 
-        robot.driveDistance(.99,48);
-        //robot.outake(.99);
-        //sleep(2000);
-        robot.rotateRobot(125);
-        robot.driveDistance(.99,100);
+        robot.latch(1,-70);
+        robot.rotateRobot(-50);
+        robot.latch(1,60);
+        robot.rotateRobot(5);
 
-        /* lander to 'depot =  49 inches
-           depot to crater = 85 inches
-           lander to crater = 38 inches
-           lander to minerals = 11 inches
-           minerals to side wall = 40 inches
-           side wall to depot = 40 inches
-         */
+        robot.driveDistance(.99,-38);
+        robot.outake(.99);
+        sleep(1500);
 
+        robot.stopDriving();
+
+        robot.rotateRobot(-120);
+        robot.driveDistance(.99,-100);
+
+
+       /* robot.latch(.99, -70);
+        robot.turnRight(.99);
+        sleep(6000);
+        robot.latch(.99,60);
+        robot.turnLeft(.99);
+        sleep(6000);
+        robot.driveDistance(.99,50);
+        robot.rotateRobot(25);
+        robot.driveDistance(.99,50);
+*/
     }
 }

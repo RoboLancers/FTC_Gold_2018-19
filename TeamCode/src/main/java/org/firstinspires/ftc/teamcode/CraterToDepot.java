@@ -15,24 +15,29 @@ public class CraterToDepot extends LinearOpMode {
 
         waitForStart();
 
-        robot.latchNotEncoder(-.99);
+        robot.latch(1,-70);
+        robot.rotateRobot(-50);
+        robot.latch(1,60);
+        robot.rotateRobot(5);
+
+        robot.driveDistance(.99, -20);
+
+        robot.stopDriving();
+
+        robot.rotateRobot(85);
+      /*  robot.driveDistance(1,-40);
+
+        robot.stopDriving();
+
+        robot.rotateRobot(60);
+        robot.driveDistance(1,-60);
+
+        robot.stopDriving();
+
+        robot.outake(.99);
         sleep(2000);
-        robot.rotateRobot(50);
-        robot.latchNotEncoder(.99);
-        sleep(1800);
-        robot.rotateRobot(-10);
-
-        robot.driveDistance(.99, 20);
-
-        robot.rotateRobot(-90);
-        robot.driveDistance(.99,40);
-        robot.rotateRobot(50);
-        robot.driveDistance(.99,40);
-        //robot.outake(.99);
-        //sleep(2000);
-        robot.driveDistance(.99,-100);
-
-
+        robot.driveDistance(1,100);
+        */
     }
         /* lander to 'depot =  49 inches
            depot to crater = 85 inches

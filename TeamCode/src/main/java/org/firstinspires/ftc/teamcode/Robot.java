@@ -34,8 +34,8 @@ public class Robot {
         Intake = hardwareMap.dcMotor.get("Intake");
         flipper = hardwareMap.dcMotor.get("Flipper");
 
-        topLeft.setDirection(DcMotor.Direction.REVERSE);
-        bottomLeft.setDirection(DcMotor.Direction.REVERSE);
+        topRight.setDirection(DcMotor.Direction.REVERSE);
+        bottomRight.setDirection(DcMotor.Direction.REVERSE);
     }
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
@@ -47,8 +47,8 @@ public class Robot {
         Intake = hardwareMap.dcMotor.get("Intake");
         flipper = hardwareMap.dcMotor.get("Flipper");
 
-        topLeft.setDirection(DcMotor.Direction.REVERSE);
-        bottomLeft.setDirection(DcMotor.Direction.REVERSE);
+        topRight.setDirection(DcMotor.Direction.REVERSE);
+        bottomRight.setDirection(DcMotor.Direction.REVERSE);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -59,6 +59,7 @@ public class Robot {
         imu.initialize(parameters);
 
         this.telemetry = telemetry;
+
     }
 
     public void outake(double power) {
@@ -99,6 +100,7 @@ public class Robot {
         bottomLeft.setPower(0);
         topLeft.setPower(0);
         latch.setPower(0);
+        Intake.setPower(0);
     }
 
 
@@ -135,7 +137,24 @@ public class Robot {
 
     stopDriving();
 }
+    public void turnleft(double power, double inches){
+        topLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        topRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        topLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bottomLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        topRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bottomRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        topLeft.setTargetPosition((int) ((inchesToTick(inches))));
+        bottomLeft.setTargetPosition((int) ((inchesToTick(inches))));
+        topRight.setTargetPosition((int) ((inchesToTick(-inches))));
+        bottomRight.setTargetPosition((int) (inchesToTick(-inches)));
+
+
+    }
    public void latch(double power, double inches) {
         latch.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
