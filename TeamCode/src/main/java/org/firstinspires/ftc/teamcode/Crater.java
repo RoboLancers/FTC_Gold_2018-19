@@ -15,22 +15,24 @@ public class Crater extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-       // tensorflowWrapper = new TensorflowWrapper(hardwareMap);
-       // tensorflowWrapper.activateTfod();
-        robot.hardware(hardwareMap, telemetry);
-
         waitForStart();
 
-        robot.latch(1,-70);
-        robot.rotateRobot(-50);
-        robot.latch(1,60);
-        robot.rotateRobot(5);
+            // tensorflowWrapper = new TensorflowWrapper(hardwareMap);
+            // tensorflowWrapper.activateTfod();
+            robot.hardware(hardwareMap, telemetry);
 
-        robot.driveDistance(.99,-28);
+            robot.latch(1, -70);
+            robot.rotateRobot(-35);
+            robot.latch(1, 60);
+            robot.rotateRobot(10);
+
+            robot.driveDistance(.99, -32);
+
+            robot.stopDriving();
 
 
-        //sampling
-        //we dont know field view yet
+            //sampling
+            //we dont know field view yet
 
        /* while (tensorflowWrapper.getFirstGoldMineralX() == -1) {
             tensorflowWrapper.updateRecognition();
@@ -55,15 +57,5 @@ public class Crater extends LinearOpMode {
 
 */
 
-
-
-        /* lander to depot =  49 inches
-           depot to crater = 85 inches
-           lander to crater = 38 inches
-           lander to minerals = 11 inches
-           minerals to side wall = 40 inches
-           side wall to depot = 40 inches
-         */
-
+        }
     }
-}

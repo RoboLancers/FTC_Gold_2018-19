@@ -7,40 +7,33 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class Depot extends LinearOpMode {
 
     Robot robot = new Robot();
+
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.hardware(hardwareMap, telemetry);
 
         waitForStart();
 
-        //for rotating
-        //negative=right
-        //positive=left
+            robot.hardware(hardwareMap, telemetry);
 
-        robot.latch(1,-70);
-        robot.rotateRobot(-50);
-        robot.latch(1,60);
-        robot.rotateRobot(5);
+            //for rotating
+            //negative=right
+            //positive=left
 
-        robot.driveDistance(.99,-38);
-        robot.outake(.99);
-        sleep(1500);
+            robot.latch(1, -70);
+            robot.rotateRobot(-35);
+            robot.latch(1, 60);
+            robot.rotateRobot(10);
 
-        robot.stopDriving();
+            robot.driveDistance(.99, -44);
+            robot.outake(.99);
+            sleep(1500);
 
-        robot.rotateRobot(-120);
-        robot.driveDistance(.99,-100);
+            robot.stopDriving();
 
+            //robot.turnRight(.99);
+            //sleep(3500);
+            //robot.rotateRobot(-100);
+            // robot.driveDistance(.99,-100);
 
-       /* robot.latch(.99, -70);
-        robot.turnRight(.99);
-        sleep(6000);
-        robot.latch(.99,60);
-        robot.turnLeft(.99);
-        sleep(6000);
-        robot.driveDistance(.99,50);
-        robot.rotateRobot(25);
-        robot.driveDistance(.99,50);
-*/
+        }
     }
-}

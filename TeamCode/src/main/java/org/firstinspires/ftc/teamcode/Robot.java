@@ -5,6 +5,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -137,24 +139,7 @@ public class Robot {
 
     stopDriving();
 }
-    public void turnleft(double power, double inches){
-        topLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        topRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        topLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bottomLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        topRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bottomRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        topLeft.setTargetPosition((int) ((inchesToTick(inches))));
-        bottomLeft.setTargetPosition((int) ((inchesToTick(inches))));
-        topRight.setTargetPosition((int) ((inchesToTick(-inches))));
-        bottomRight.setTargetPosition((int) (inchesToTick(-inches)));
-
-
-    }
    public void latch(double power, double inches) {
         latch.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -187,12 +172,19 @@ public class Robot {
 
     public void rotateRobot(double Degrees) {
         double error = Degrees - getAngle();
+        double minPower = 0.01;
 
         while (Math.abs(error) > 5) {
 
             error = Degrees - getAngle();
-            double output = error * 0.01;
+            double output = error * 0.015;
 
+          /*
+            if (Math.abs(output) < minPower){
+                output =
+                output = minPower;
+
+            } */
             topRight.setPower(-output);
             bottomRight.setPower(-output);
             bottomLeft.setPower(output);
