@@ -4,22 +4,25 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.utility.vision.FieldView;
+import org.firstinspires.ftc.teamcode.utility.vision.MineralPosition;
 import org.firstinspires.ftc.teamcode.utility.vision.TensorflowWrapper;
 
 @Autonomous(name = "Crater")
 public class Crater extends LinearOpMode {
 
     Robot robot = new Robot();
-    //TensorflowWrapper tensorflowWrapper;
+    TensorflowWrapper tensorflowWrapper;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         waitForStart();
 
-            // tensorflowWrapper = new TensorflowWrapper(hardwareMap);
-            // tensorflowWrapper.activateTfod();
-            robot.hardware(hardwareMap, telemetry);
+        TensorflowWrapper tensorflowWrapper = new TensorflowWrapper(hardwareMap, FieldView.LEFT);
+        tensorflowWrapper.activateTfod();
+
+             /*robot.hardware(hardwareMap, telemetry);
 
             robot.latch(1, -70);
             robot.rotateRobot(-35);
@@ -30,11 +33,12 @@ public class Crater extends LinearOpMode {
 
             robot.stopDriving();
 
-
+*/
             //sampling
             //we dont know field view yet
+        tensorflowWrapper.detectMinerals(10, this);
 
-       /* while (tensorflowWrapper.getFirstGoldMineralX() == -1) {
+        while (tensorflowWrapper.getFirstGoldMineralX() == -1) {
             tensorflowWrapper.updateRecognition();
             tensorflowWrapper.updateMineralPosition();
 
@@ -55,7 +59,7 @@ public class Crater extends LinearOpMode {
             robot.driveDistance(1, 15);
         }
 
-*/
+
 
         }
     }

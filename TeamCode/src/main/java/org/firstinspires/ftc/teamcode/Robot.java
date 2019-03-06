@@ -38,6 +38,7 @@ public class Robot {
 
         topRight.setDirection(DcMotor.Direction.REVERSE);
         bottomRight.setDirection(DcMotor.Direction.REVERSE);
+
     }
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
