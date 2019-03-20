@@ -22,9 +22,9 @@ public class Crater extends LinearOpMode {
         TensorflowWrapper tensorflowWrapper = new TensorflowWrapper(hardwareMap, FieldView.LEFT);
         tensorflowWrapper.activateTfod();
 
-             /*robot.hardware(hardwareMap, telemetry);
+            robot.hardware(hardwareMap, telemetry);
 
-            robot.latch(1, -70);
+           /* robot.latch(1, -70);
             robot.rotateRobot(-35);
             robot.latch(1, 60);
             robot.rotateRobot(10);
@@ -34,32 +34,48 @@ public class Crater extends LinearOpMode {
             robot.stopDriving();
 
 */
-            //sampling
-            //we dont know field view yet
-        tensorflowWrapper.detectMinerals(10, this);
+        //sampling
+        //we dont know field view yet
+
+        tensorflowWrapper.detectMinerals(30, this);
 
         while (tensorflowWrapper.getFirstGoldMineralX() == -1) {
-            tensorflowWrapper.updateRecognition();
-            tensorflowWrapper.updateMineralPosition();
+              tensorflowWrapper.updateRecognition();
+              tensorflowWrapper.updateMineralPosition();
 
             telemetry.addData("# Object Detected", tensorflowWrapper.getNumberOfObjectsDetected());
             telemetry.addData("Gold X", tensorflowWrapper.getFirstGoldMineralX());
             telemetry.update();
         }
 
-        tensorflowWrapper.shutdown();
+           /* if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.LEFT) {
+                robot.turnRight(-0.5);
+                sleep(250);
+                //robot.rotateRobot(15);
+                //robot.driveDistance(1, 15);
+            } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.RIGHT) {
+                robot.turnRight(0.5);
+                sleep(250);
+                // robot.driveDistance(1, 15);
+            } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.CENTER){
+                robot.driveDistance(.99,-15);
+            } */
 
         if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.LEFT) {
-            robot.rotateRobot(15);
-            robot.driveDistance(1, 15);
-        } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.RIGHT) {
-            robot.rotateRobot(-15);
-            robot.driveDistance(1, 15);
-        }else {
-            robot.driveDistance(1, 15);
+            robot.turnRight(-0.5);
+            sleep(250);
+            //robot.rotateRobot(15);
+            //robot.driveDistance(1, 15);
+        } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.CENTER){
+            robot.driveDistance(.99,-15);
+        }else tensorflowWrapper.detectedTwoSilverMinerals();
+            {
+            robot.turnRight(0.5);
+            sleep(250);
         }
 
+        tensorflowWrapper.shutdown();
 
+    }
 
-        }
     }

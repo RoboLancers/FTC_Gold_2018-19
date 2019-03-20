@@ -40,6 +40,7 @@ Sampling extends LinearOpMode {
         TensorflowWrapper tensorflowWrapper = new TensorflowWrapper(hardwareMap, FieldView.LEFT);
         tensorflowWrapper.activateTfod();
 
+
         waitForStart();
 
         tensorflowWrapper.detectMinerals(10, this);

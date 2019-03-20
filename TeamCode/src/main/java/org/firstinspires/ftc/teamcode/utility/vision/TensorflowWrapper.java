@@ -37,10 +37,6 @@ public class TensorflowWrapper {
 
     private ElapsedTime timer;
 
-    public TensorflowWrapper(HardwareMap hardwareMap){
-        this(hardwareMap, FieldView.FULL);
-    }
-
     public TensorflowWrapper(HardwareMap hardwareMap, FieldView fieldView){
         this.hardwareMap = hardwareMap;
 
@@ -223,7 +219,8 @@ public class TensorflowWrapper {
             if(detectedTwoSilverMinerals()){
                 //If we see two silver minerals then the gold is automatically on the right because our phone is on the left
                 return MineralPosition.RIGHT;
-            }else if(detectedOneGoldMineral() && detectedOneSilverMineral()){
+            }
+            if(detectedOneGoldMineral() && detectedOneSilverMineral()){
                 double goldMineralX = goldMineralPoints.get(0).getX();
                 double silverMineralX = silverMineralPoints.get(0).getX();
 

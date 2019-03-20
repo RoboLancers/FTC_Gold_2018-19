@@ -83,18 +83,11 @@ public class Robot {
         bottomRight.setPower(-power);
     }
 
-    public void turnLeft(double power) {
+    public void turnRight(double power) {
         topLeft.setPower(-power);
         bottomLeft.setPower(-power);
         topRight.setPower(power);
         bottomRight.setPower(power);
-    }
-
-    public void turnRight(double power) {
-        topLeft.setPower(power);
-        bottomLeft.setPower(power);
-        topRight.setPower(-power);
-        bottomRight.setPower(-power);
     }
 
     public void stopDriving() {
