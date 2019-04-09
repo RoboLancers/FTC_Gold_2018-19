@@ -24,7 +24,7 @@ public class Crater extends LinearOpMode {
 
             robot.hardware(hardwareMap, telemetry);
 
-           /* robot.latch(1, -70);
+            robot.latch(1, -70);
             robot.rotateRobot(-35);
             robot.latch(1, 60);
             robot.rotateRobot(10);
@@ -33,11 +33,11 @@ public class Crater extends LinearOpMode {
 
             robot.stopDriving();
 
-*/
+
         //sampling
         //we dont know field view yet
 
-        tensorflowWrapper.detectMinerals(30, this);
+      /*  tensorflowWrapper.detectMinerals(30, this);
 
         while (tensorflowWrapper.getFirstGoldMineralX() == -1) {
               tensorflowWrapper.updateRecognition();
@@ -48,19 +48,6 @@ public class Crater extends LinearOpMode {
             telemetry.update();
         }
 
-           /* if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.LEFT) {
-                robot.turnRight(-0.5);
-                sleep(250);
-                //robot.rotateRobot(15);
-                //robot.driveDistance(1, 15);
-            } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.RIGHT) {
-                robot.turnRight(0.5);
-                sleep(250);
-                // robot.driveDistance(1, 15);
-            } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.CENTER){
-                robot.driveDistance(.99,-15);
-            } */
-
         if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.LEFT) {
             robot.turnRight(-0.5);
             sleep(250);
@@ -68,13 +55,13 @@ public class Crater extends LinearOpMode {
             //robot.driveDistance(1, 15);
         } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.CENTER){
             robot.driveDistance(.99,-15);
-        }else tensorflowWrapper.detectedTwoSilverMinerals();
+        }else
             {
             robot.turnRight(0.5);
             sleep(250);
         }
 
-        tensorflowWrapper.shutdown();
+        tensorflowWrapper.shutdown(); */
 
     }
 

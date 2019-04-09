@@ -19,7 +19,7 @@ public class Depot extends LinearOpMode {
             //negative=right
             //positive=left
 
-            robot.latch(1, -70);
+            robot.latch(1, -65);
             robot.rotateRobot(-35);
             robot.latch(1, 60);
             robot.rotateRobot(10);

@@ -161,24 +161,17 @@ public class Robot {
 
     public double getAngle() {
         return AngleUnit.DEGREES.normalize(imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
-    }
+}
 
 
     public void rotateRobot(double Degrees) {
         double error = Degrees - getAngle();
-        double minPower = 0.01;
 
         while (Math.abs(error) > 5) {
-
+                        
             error = Degrees - getAngle();
-            double output = error * 0.015;
+            double output = error * 0.025;
 
-          /*
-            if (Math.abs(output) < minPower){
-                output =
-                output = minPower;
-
-            } */
             topRight.setPower(-output);
             bottomRight.setPower(-output);
             bottomLeft.setPower(output);
@@ -190,5 +183,6 @@ public class Robot {
         }
         stopDriving();
     }
+
 
 }
