@@ -13,8 +13,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 
-
-
 public class Robot {
 
     DcMotor topLeft, topRight, bottomLeft, bottomRight;
@@ -26,7 +24,7 @@ public class Robot {
 
     Telemetry telemetry;
 
-    public void hardware2(HardwareMap hardwareMap){
+    public void hardware2(HardwareMap hardwareMap) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
         topRight = hardwareMap.dcMotor.get("Top Right");
         bottomLeft = hardwareMap.dcMotor.get("Bottom Left");
@@ -40,6 +38,7 @@ public class Robot {
         bottomRight.setDirection(DcMotor.Direction.REVERSE);
 
     }
+
     public void hardware(HardwareMap hardwareMap, Telemetry telemetry) {
         topLeft = hardwareMap.dcMotor.get("Top Left");
         topRight = hardwareMap.dcMotor.get("Top Right");
@@ -57,7 +56,7 @@ public class Robot {
 
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
 
-        imu = hardwareMap.get(BNO055IMU.class,"imu");
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
 
         imu.initialize(parameters);
 
@@ -124,25 +123,25 @@ public class Robot {
         driveForward(power);
 
         while (topLeft.isBusy() && bottomLeft.isBusy() && topRight.isBusy() && bottomRight.isBusy()) {
-            telemetry.addData("top left encoders are at",topLeft.getCurrentPosition());
-            telemetry.addData("top right encoders are at",topRight.getCurrentPosition());
-            telemetry.addData("bottom left encoders are at",bottomLeft.getCurrentPosition());
-            telemetry.addData("bottom right encoders are at",bottomRight.getCurrentPosition());
+            telemetry.addData("top left encoders are at", topLeft.getCurrentPosition());
+            telemetry.addData("top right encoders are at", topRight.getCurrentPosition());
+            telemetry.addData("bottom left encoders are at", bottomLeft.getCurrentPosition());
+            telemetry.addData("bottom right encoders are at", bottomRight.getCurrentPosition());
             telemetry.update();
-         }
+        }
 
-    stopDriving();
-}
+        stopDriving();
+    }
 
-   public void latch(double power, double inches) {
+    public void latch(double power, double inches) {
         latch.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         latch.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         latch.setTargetPosition((int) (inchesToTick(inches)));
         latch.setPower(power);
 
-        while(latch.isBusy()){
-            telemetry.addData("latch encoders are at",latch.getCurrentPosition());
-       }
+        while (latch.isBusy()) {
+            telemetry.addData("latch encoders are at", latch.getCurrentPosition());
+        }
 
         stopDriving();
     }
@@ -161,16 +160,16 @@ public class Robot {
 
     public double getAngle() {
         return AngleUnit.DEGREES.normalize(imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
-}
+    }
 
 
     public void rotateRobot(double Degrees) {
         double error = Degrees - getAngle();
 
         while (Math.abs(error) > 5) {
-                        
+
             error = Degrees - getAngle();
-            double output = error * 0.025;
+            double output = error * 0.015;
 
             topRight.setPower(-output);
             bottomRight.setPower(-output);
@@ -182,7 +181,7 @@ public class Robot {
 
         }
         stopDriving();
+
+
     }
-
-
 }

@@ -34,21 +34,23 @@ public class GoldTeleOp extends OpMode {
         double flipper = -(gamepad2.left_stick_y);
         boolean buttonA = gamepad2.a;
         boolean buttonB = gamepad2.b;
+       // double latchjoystick = -(gamepad2.right_stick_y);
 
 
         robot.topLeft.setPower(leftsticky);
         robot.bottomLeft.setPower(leftsticky);
         robot.topRight.setPower(rightsticky);
         robot.bottomRight.setPower(rightsticky);
-        
+
+       // robot.latchjoystick.setPower(latchjoystick * 0.5);
         robot.flipper.setPower(flipper * 0.5);
 
         if (buttonA) /* button 4 or y */{
-            robot.latch.setPower(1.00);
+        robot.latch.setPower(1.00);
         }else {
-            robot.latch.setPower(0.0);
+           robot.latch.setPower(0.0);
         }
-        if (buttonB)  /* button 1 or x*/ {
+         if (buttonB)  /* button 1 or x*/ {
             robot.latch.setPower(-1.00);
 
         }else {

@@ -19,25 +19,27 @@ public class Crater extends LinearOpMode {
 
         waitForStart();
 
-        TensorflowWrapper tensorflowWrapper = new TensorflowWrapper(hardwareMap, FieldView.LEFT);
-        tensorflowWrapper.activateTfod();
+       // TensorflowWrapper tensorflowWrapper = new TensorflowWrapper(hardwareMap, FieldView.LEFT);
 
-            robot.hardware(hardwareMap, telemetry);
+           robot.hardware(hardwareMap, telemetry);
 
             robot.latch(1, -70);
-            robot.rotateRobot(-35);
+            robot.turnRight(0.5);
+            sleep(500);
+            robot.stopDriving();
             robot.latch(1, 60);
-            robot.rotateRobot(10);
+            robot.turnRight(-0.5);
+            sleep(700);
+            robot.stopDriving();
 
             robot.driveDistance(.99, -32);
 
             robot.stopDriving();
 
 
-        //sampling
-        //we dont know field view yet
+       /* tensorflowWrapper.activateTfod();
 
-      /*  tensorflowWrapper.detectMinerals(30, this);
+       tensorflowWrapper.detectMinerals(30, this);
 
         while (tensorflowWrapper.getFirstGoldMineralX() == -1) {
               tensorflowWrapper.updateRecognition();
@@ -51,18 +53,17 @@ public class Crater extends LinearOpMode {
         if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.LEFT) {
             robot.turnRight(-0.5);
             sleep(250);
-            //robot.rotateRobot(15);
             //robot.driveDistance(1, 15);
         } else if (tensorflowWrapper.getGoldMineralPosition() == MineralPosition.CENTER){
-            robot.driveDistance(.99,-15);
+            robot.driveDistance(.99,-32);
         }else
             {
             robot.turnRight(0.5);
             sleep(250);
         }
 
-        tensorflowWrapper.shutdown(); */
-
+        tensorflowWrapper.shutdown();
+*/
     }
 
     }
